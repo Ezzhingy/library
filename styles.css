@@ -1,6 +1,7 @@
 :root {
     --default-pink: #DEC7C7;
     --dark-pink: #D9A8A8;
+    --dark-hover-pink: #bd6868;
     --yes-green: #9de4ab;
     --no-red: #ea8288;
 }
@@ -33,6 +34,10 @@ img {
     padding: 10px 30px 10px 30px;
     margin: 10px 0 10px 0;
     font-weight: 700;
+}
+
+.header .add-book:active {
+    background-color: var(--dark-hover-pink);
 }
 
 .form-container {
@@ -97,5 +102,22 @@ img {
 .card {
     height: 150px;
     background-color: white;
-
+    text-align: center;
+    font-size: large;
+    padding-top: 10px;
+    position: relative;
 }
+
+.card p {
+    text-align: center;
+}
+
+.remove-btn {
+    background-color: var(--no-red);
+    padding: 6px;
+    margin: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+

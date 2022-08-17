@@ -3,6 +3,7 @@ function createBook(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.index = null;
     this.info = () => {
         return `${title} by ${author}, ${pages} pages`
     };
@@ -10,29 +11,45 @@ function createBook(title, author, pages, read) {
 
 function addBookToLibrary(user) {
   LIBRARY.push(user);
+  user.index = LIBRARY.length - 1;
 }
 
 function displayBook() {
   const body = document.querySelector(".body");
   body.innerHTML = '';
+  
+  let index = 0;
 
   for (let book of LIBRARY) {
+
     const bookContainer = document.createElement('div');
+    const removeBtn = document.createElement('button');
+
     bookContainer.classList.add("card");
     bookContainer.innerText = book.info();
+
+    removeBtn.innerText = 'Remove';
+    removeBtn.setAttribute('data-index', index);
+    removeBtn.classList.add("remove-btn");
+    bookContainer.appendChild(removeBtn);
+
+    index++;
+
     body.appendChild(bookContainer);
+
+    document.addEventListener('click', removeBook);
   }
 }
 
-function openForm(e) {
+function openForm() {
   document.querySelector(".form-container").style.display = "block";
 }
 
-function closeForm(e) {
+function closeForm() {
   document.querySelector(".form-container").style.display = "none";
 }
 
-function getData(e) {
+function getData() {
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const pages = document.getElementById('pages').value;
@@ -47,6 +64,16 @@ function getData(e) {
   displayBook();
 }
 
+function removeBook(e) {
+  if (e.target.hasAttribute('data-index')) {
+    const index = e.target.getAttribute('data-index');
+    console.log(index);
+    LIBRARY.splice(index, 1);
+    displayBook();
+  }
+
+}
+
 const LIBRARY = [];
 
 const addBookBtn = document.querySelector('.add-book');
@@ -56,3 +83,4 @@ const buttonCancel = document.querySelector('.button-cancel');
 const buttonAdd = document.querySelector('.button-add');
 buttonCancel.addEventListener('click', closeForm);
 buttonAdd.addEventListener('click', getData);
+
