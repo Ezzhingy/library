@@ -121,3 +121,27 @@ img {
     left: 0;
 }
 
+.read-btn, .unread-btn {
+    padding: 6px;
+    margin: 5px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.read-btn {
+    background-color: var(--yes-green);
+}
+
+.read-btn::after {
+    content: 'Read';
+}
+
+.unread-btn {
+    background-color: var(--dark-hover-pink);
+}
+
+.unread-btn::after {
+    content: 'Unread';
+}
+

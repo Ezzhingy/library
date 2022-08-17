@@ -3,7 +3,6 @@ function createBook(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.index = null;
     this.info = () => {
         return `${title} by ${author}, ${pages} pages`
     };
@@ -11,33 +10,43 @@ function createBook(title, author, pages, read) {
 
 function addBookToLibrary(user) {
   LIBRARY.push(user);
-  user.index = LIBRARY.length - 1;
 }
 
 function displayBook() {
   const body = document.querySelector(".body");
   body.innerHTML = '';
-  
+
   let index = 0;
 
   for (let book of LIBRARY) {
 
     const bookContainer = document.createElement('div');
     const removeBtn = document.createElement('button');
+    const readBtn = document.createElement('button');
 
     bookContainer.classList.add("card");
     bookContainer.innerText = book.info();
 
+    removeBtn.classList.add("remove-btn");
     removeBtn.innerText = 'Remove';
     removeBtn.setAttribute('data-index', index);
-    removeBtn.classList.add("remove-btn");
     bookContainer.appendChild(removeBtn);
+
+    if (book.read == 'read') {
+      readBtn.classList.add('read-btn');
+    } else {
+      readBtn.classList.add('unread-btn');
+    }
+    readBtn.setAttribute('data-index-read', index);
+    bookContainer.appendChild(readBtn);
 
     index++;
 
     body.appendChild(bookContainer);
 
     document.addEventListener('click', removeBook);
+    
+    document.addEventListener('click', toggleRead);
   }
 }
 
@@ -71,7 +80,21 @@ function removeBook(e) {
     LIBRARY.splice(index, 1);
     displayBook();
   }
+}
 
+function toggleRead(e) {
+  if (e.target.className == 'read-btn') {
+    e.target.classList.remove('read-btn');
+    e.target.classList.add('unread-btn');
+    const index = e.target.getAttribute('data-index-read');
+    LIBRARY[index].read = 'unread';
+    console.log(LIBRARY[index], index);
+  } else if (e.target.className == 'unread-btn') {
+    e.target.classList.remove('unread-btn');
+    e.target.classList.add('read-btn');
+    const index = e.target.getAttribute('data-index-read');
+    LIBRARY[index].read = 'read';
+  }
 }
 
 const LIBRARY = [];
