@@ -32,12 +32,6 @@ body {
     }
 }
 
-img {
-    position: absolute;
-    top: 40%;
-    width: 100%;
-}
-
 button {
     border-radius: 8px;
 }
