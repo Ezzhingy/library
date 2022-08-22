@@ -5,3 +5,4 @@ Designed using Figma. Created using HTML, CSS, and JavaScript. From this project
 - Created a whole design for an app through Figma
 - Store HTML form data in a Javascript array
 - Keep track of data in Javascript to update the books on the browser
+- Organize code into classes and modules
